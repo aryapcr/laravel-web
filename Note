@@ -1,0 +1,8 @@
+Command/Perintah Git :
+
+git init	                  :  Membuat repositori Git di folder lokal
+git add .	                  :  Menambahkan semua file yang berubah ke staging area
+git add home.php	          :  Menambahkan file dengan nama “home.php” ke staging area
+git status	                  : Melihat status file (baru, diubah, atau sudah siap di-commit)
+git commit -m "isi perubahan" :	Menyimpan snapshot perubahan dari staging ke local repository
+git log	                      :  Menampilkan riwayat commit yang sudah dibuatgit -m 
