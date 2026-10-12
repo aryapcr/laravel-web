@@ -27,8 +27,19 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all()); 
+        // Validasi input form pertanyaan
+        $validated = $request->validate([
+            'nama' => ['required', 'min:5'],
+            'email' => ['required', 'email'],
+            'pertanyaan' => ['required', 'min:10', 'max:300'],
+        ]);
+
+        // Redirect ke halaman home dan tampilkan notifikasi sementara
+        return redirect()->route('home')
+            ->with('info', 'Data anda berhasil diinput!');
     }
+
+
 
     /**
      * Display the specified resource.

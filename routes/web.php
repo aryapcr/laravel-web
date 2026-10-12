@@ -5,6 +5,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuestionController; // 1. TAMBAHKAN IMPORT INI
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,7 +37,10 @@ Route::get('/matakuliah/show/{kode?}', [MatakuliahController::class, 'show']);
 
 Route::resource('matakuliah', MatakuliahController::class)->except(['show']);
 
-Route::get('/home', [HomeController::class, 'index']);
+
+Route::get('/home', [HomeController::class, 'index'])
+    ->name('home');
+
 
 // 2. TAMBAHKAN ROUTE GET INI UNTUK MEMBUKA FORM (home.blade.php)
 Route::get('/question', function () {
@@ -46,3 +50,10 @@ Route::get('/question', function () {
 // Route POST untuk memproses submit form
 Route::post('/question/store', [QuestionController::class, 'store'])
         ->name('question.store');
+
+Route::get('/home-question-respon', function () {
+    return view('home-question-respon');
+})->name('home-question-respon');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
