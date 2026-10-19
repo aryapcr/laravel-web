@@ -30,3 +30,7 @@ git log	                      :  Menampilkan riwayat commit yang sudah dibuatgit
 
         // 3. Return view dengan membawa data
         return view('home-question-respon', compact('nama', 'email', 'pertanyaan'));
+
+    Controller digunakan untuk mengatur alur logika aplikasi, menerima input dari pengguna, memproses data, dan mengembalikan respons. Controller bertindak sebagai penghubung antara model (data) dan view (tampilan).
+    Model digunakan untuk berinteraksi dengan database, mengambil data, menyimpan data, dan melakukan operasi terkait data. Model merepresentasikan entitas atau tabel dalam database.
+    View digunakan untuk menampilkan antarmuka pengguna (UI) dan menyajikan data kepada pengguna. View bertanggung jawab untuk merender tampilan yang dapat dilihat oleh pengguna, seperti halaman web atau formulir.
