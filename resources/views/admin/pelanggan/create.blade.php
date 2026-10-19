@@ -300,6 +300,19 @@
                     <div class="card-body">
                         <form action="{{ route('pelanggan.store') }}" method="POST">
     @csrf
+
+{{-- Menampilkan pesan error validasi --}}
+@if ($errors->any())
+    <div class="alert alert-danger" role="alert">
+        <strong>Terjadi kesalahan!</strong>
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
                             <div class="row mb-4">
                                 <div class="col-lg-4 col-sm-6">
                                     <!-- First Name -->
@@ -349,7 +362,7 @@
 
                                     <!-- Buttons -->
                                     <div class="">
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                         <a href="{{ route('pelanggan.create') }}" class="btn btn-outline-secondary ms-2">Batal</a>
                                     </div>
                                 </div>

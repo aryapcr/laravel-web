@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pelanggan;
+use Illuminate\Validation\Rule ;
 
 class PelangganController extends Controller
 {
@@ -28,18 +29,20 @@ class PelangganController extends Controller
      */
      public function store(Request $request)
     {
-        //dd($request->all());
+        $validated = $request->validate([
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'birthday' => 'required|date',
+        'gender' => 'required|in:Male,Female',
+        'email' => 'required|email|unique:pelanggan,email',
+        'phone' => 'required|numeric',
+    ]);
 
-        $data['first_name'] = $request->first_name;
-		$data['last_name'] = $request->last_name;
-		$data['birthday'] = $request->birthday;
-		$data['gender'] = $request->gender;
-		$data['email'] = $request->email;
-		$data['phone'] = $request->phone;
+    Pelanggan::create($validated);
 
-		Pelanggan::create($data);
-
-		return redirect()->route('pelanggan.index')->with('success','Penambahan Data Berhasil!');
+    return redirect()
+        ->route('pelanggan.index')
+        ->with('success', 'Penambahan data berhasil!');
     }
 
     /**
@@ -64,7 +67,27 @@ class PelangganController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pelanggan = Pelanggan::findOrFail($id);
+
+    $validated = $request->validate([
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'birthday' => 'required|date',
+        'gender' => 'required|in:Male,Female',
+        'email' => [
+            'required',
+            'email',
+            Rule::unique('pelanggan', 'email')
+                ->ignore($pelanggan->pelanggan_id, 'pelanggan_id'),
+        ],
+        'phone' => 'required|numeric',
+    ]);
+
+    $pelanggan->update($validated);
+
+    return redirect()
+        ->route('pelanggan.index')
+        ->with('success', 'Perubahan data berhasil!');
     }
 
     /**
@@ -72,6 +95,11 @@ class PelangganController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pelanggan = Pelanggan::findOrFail($id);
+        $pelanggan->delete();
+
+        return redirect()
+            ->route('pelanggan.index')
+            ->with('success', 'Data Berhasil Dihapus!');
     }
 }
