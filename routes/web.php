@@ -7,6 +7,7 @@ use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,3 +61,5 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
 
 Route::resource('pelanggan', PelangganController::class); //Resource semua function yg dijalankan dipanggil dengan controller PelangganController
+
+Route::resource('user', UserController::class); //Resource semua function yg dijalankan dipanggil dengan controller UserController
